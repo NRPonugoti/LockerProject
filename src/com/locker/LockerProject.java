@@ -9,36 +9,47 @@ public class LockerProject {
 	static final String folderpath = "C:\\Users\\Admin23\\Desktop\\SimpleLearn\\LockerProject\\LockedFiles";
 
 	public static void main(String[] args) {
-		 int proceed=1;
-		 do {
-		//variable declaration
-		Scanner obj= new Scanner(System.in);
-		int ch;
-		//Displaying manu 
-		displayMenu();
-		ch=Integer.parseInt(obj.nextLine()) ;
-		switch(ch) {
-		case 1:getAllFiles();
-		         break;
-		case 2:createFile();
-		        break ;
-		case 5 : System.out.println("Application is Closed ");
-			System.exit(0);
-	     break;
-		  default : System.out.println("Invalid Operation");
-		  break;
-		}
-		
-		 } while(proceed>0);
-		
+		int proceed = 1;
+		do {
+			// variable declaration
+			Scanner obj = new Scanner(System.in);
+			int ch;
+			// Displaying manu
+			displayMenu();
+			ch = Integer.parseInt(obj.nextLine());
+			switch (ch) {
+			case 1:
+				getAllFiles();
+				break;
+			case 2:
+				createFile();
+				break;
+			case 3:
+				deleteFiles(obj);
+				break;
+			case 4:
+				searchFiles(obj);
+				break;
+
+			case 5:
+				System.out.println("Application is Closed ");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid Operation");
+				break;
+			}
+
+		} while (proceed > 0);
+
 	}
 
 	private static void displayMenu() {
-		//Menu
+		// Menu
 		System.out.println("*************************************************");
-		System.out.println("\t\t Company Lockers Pvt.Ltd.");
+		System.out.println("\t\t LockedMe.com");
 		System.out.println("*************************************************");
-		
+
 		System.out.println("1. Display all files");
 		System.out.println("2. Add new file files");
 		System.out.println("3. Delete a files");
@@ -48,9 +59,9 @@ public class LockerProject {
 		System.out.println("************************************************");
 		System.out.println("Enter Your Choice :");
 	}
-
-	
-
+/*
+ * Create a new file and add the content to that file 
+ */
 	private static void createFile() {
 		// Variable declaration
 		Scanner obj = new Scanner(System.in);
@@ -75,18 +86,53 @@ public class LockerProject {
 		} else {
 			System.out.println("Some Error occured , Please contact Admin@gamil.com");
 		}
-		
-	}
 
+	}
+/*
+ * Get the All files with Names 
+ */
 	private static void getAllFiles() {
 		List<String> filesName = FilesManager.getAllFilesName(folderpath);
-		if(filesName.size()==0) {
+		if (filesName.size() == 0) {
 			System.out.println("File not exist");
 		} else {
-		for (String f : filesName) {
+			for (String f : filesName) {
 
-			System.out.println(f);
+				System.out.println(f);
+			}
 		}
+	}
+/*
+ * Search the file name and find out that files will be exist or not 
+ */
+	private static void searchFiles(Scanner obj) {
+		System.out.println("Enter the file name to be deleted :");
+		String fineSearch;
+
+		fineSearch = obj.nextLine();
+		boolean isFound = FilesManager.searchFile(folderpath, fineSearch);
+		if (isFound) {
+			System.out.println("File is present in the folder");
+		} else {
+			System.out.println("File is not exist in the folder");
+
+		}
+	}
+/*
+ * Delete the file using this Method 
+ */
+	private static void deleteFiles(Scanner obj) {
+		/*
+		 * Code for deleteFile
+		 */
+		String fileNames;
+		System.out.println("Enter the file name to be deleted :");
+		fileNames = obj.nextLine();
+		boolean isDeleted = FilesManager.deleteFile(folderpath, fileNames);
+		if (isDeleted) {
+			System.out.println("File Deleted sucessfully");
+		} else {
+			System.out.println("Some Error Occured , Please contact Admin@gmail.comm");
 		}
 	}
 

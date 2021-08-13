@@ -61,6 +61,50 @@ public class FilesManager {
 		}
 
 	}
+	/**
+	 * File will be deleted using this method
+	 * 
+	 * @param folderpath
+	 * @param filename
+	 * @return
+	 */
+
+	public static boolean deleteFile(String folderpath, String filename) {
+		// adding folderpath with file name and creating object
+		File file = new File(folderpath + "\\" + filename);
+		try {
+			if (file.delete()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	/**
+	 * this method will search the file from the folder
+	 * 
+	 * @param folderpath
+	 * @param filename
+	 * @return
+	 */
+
+	public static boolean searchFile(String folderpath, String filename) {
+		// adding folderpath with file name and creating object
+		File file = new File(folderpath + "\\" + filename);
+		/*
+		 * if file will be exist then return true otherwise fasle
+		 */
+		if (file.exists()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 
 	
 }
